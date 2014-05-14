@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Simple typing</title>
+	<link rel="stylesheet" href="http://yandex.st/bootstrap/3.0.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/github.min.css">
+	<script src="http://yandex.st/jquery/2.0.3/jquery.min.js"></script>
+	<script src="http://yandex.st/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+	<script src="../jquery.typist.js"></script>
+	<script>
+	jQuery(function($) {
+		$('.typist').typist({
+			text: 'Hello! It\'s worked!',
+			speed: 30
+		});
+	});
+	hljs.initHighlightingOnLoad();
+	</script>
+	<style>
+	.hljs {
+		padding: 0;
+		background: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h2>jquery.typist</h2>
+
+		<pre><code class="javascript">$('.typist').typist({
+	text: 'Hello! It\'s worked!',
+	speed: 30
+});
+</code></pre>
+
+		<p class="typist"></p>
+	</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
 jquery.typist
 =============
 
-Animate text typing
+Animated text typing

@@ -1,0 +1,35 @@
+{
+  "name": "jquery.typist",
+  "version": "0.0.0",
+  "description": "Animated text typing",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/albburtsev/jquery.typist.git"
+  },
+  "keywords": [
+    "jquery",
+    "plugin",
+    "typist",
+    "typing",
+    "input",
+    "animation"
+  ],
+  "author": {
+    "name": "Alexander Burtsev",
+    "url": "https://github.com/albburtsev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/albburtsev/jquery.typist/issues"
+  },
+  "homepage": "https://github.com/albburtsev/jquery.typist",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jscs-checker": "^0.4.1",
+    "matchdep": "^0.3.0"
+  }
+}
