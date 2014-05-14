@@ -12,10 +12,12 @@
 	<script src="../jquery.typist.js"></script>
 	<script>
 	jQuery(function($) {
-		$('.typist').typist({
-			text: 'Hello! It\'s worked!',
-			speed: 30
-		});
+		$('.typist')
+			.typist({
+				speed: 12,
+				text: 'Hello!'
+			})
+			.typistAdd('\nIt\'s worked!');
 	});
 	hljs.initHighlightingOnLoad();
 	</script>
@@ -30,13 +32,15 @@
 	<div class="container">
 		<h2>jquery.typist</h2>
 
-		<pre><code class="javascript">$('.typist').typist({
-	text: 'Hello! It\'s worked!',
-	speed: 30
-});
+		<pre><code class="javascript">$('.typist')
+	.typist({
+		speed: 12,
+		text: 'Hello!'
+	})
+	.typistAdd('\nIt\'s worked!');
 </code></pre>
 
-		<p class="typist"></p>
+		<p class="lead typist"></p>
 	</div>
 </body>
 </html>
