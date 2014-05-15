@@ -2,9 +2,6 @@
  * jquery.typist – animated text typing
  * @author Alexander Burtsev, http://burtsev.me, 2014
  * @license MIT
- *
- * @todo: config: speed, cursor, blinkSpeed
- * @todo: methods: typistStart, typistDelay, typistStop
  */
  (function(factory) {
 	if ( typeof define === 'function' && define.amd ) {
@@ -33,8 +30,13 @@
 		// @todo
 	};
 
-	$.fn.typistDelay = function() {
-		// @todo
+	$.fn.typistDefer = function(delay) {
+		delay = parseInt(delay) || 0;
+		return this.each(function() {
+			var self = $(this).data('typist');
+			self.queue.push({ delay: delay });
+			self.type();
+		});
 	};
 
 	$.fn.typistStop = function() {
@@ -92,34 +94,6 @@
 			}, this), this.blinkDelay);
 		},
 
-		type: function() {
-			if ( this.timer ) {
-				return;
-			}
-
-			var text = this.queue.shift();
-
-			if ( !text ) {
-				return this.stop();
-			}
-
-			if ( !this._container ) {
-				this._container = $('<span>');
-				if ( this.typeFrom === 'start' ) {
-					this._element.append(this._container);
-				} else {
-					this._element.prepend(this._container);
-				}
-			}
-
-			if ( this.cursor ) {
-				this.addCursor();
-			}
-
-			text = text.split('');
-			this.step(text);
-		},
-
 		step: function(textArray) {
 			if ( !textArray.length ) {
 				this.timer = null;
@@ -141,6 +115,47 @@
 
 		stop: function() {
 
+		},
+
+		type: function() {
+			if ( this.timer ) {
+				return;
+			}
+
+			if ( !this._container ) {
+				this._container = $('<span>');
+				if ( this.typeFrom === 'start' ) {
+					this._element.prepend(this._container);
+				} else {
+					this._element.append(this._container);
+				}
+			}
+
+			if ( this.cursor ) {
+				this.addCursor();
+			}
+
+			var item = this.queue.shift(),
+				text, delay;
+
+			if ( typeof item === 'string' ) {
+				text = item;
+			} else if ( item && item.delay ) {
+				delay = item.delay;
+				this.timer = setTimeout($.proxy(function() {
+					this.timer = null;
+					this.type();
+				}, this), delay);
+
+				return;
+			}
+
+			if ( !text ) {
+				return this.stop();
+			}
+
+			text = text.split('');
+			this.step(text);
 		}
 	};
 }));

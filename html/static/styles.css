@@ -1,0 +1,50 @@
+@import url(http://fonts.googleapis.com/css?family=Josefin+Slab);
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background: url(textured_paper.png);
+	font: 24px/1.4 'Josefin Slab', Georgia, serif;
+	}
+
+body {
+	margin: 2% 5%;
+	}
+
+h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 2em;
+	}
+
+code {
+	font: 0.5em "Lucida Console", Monaco, monospace;
+	border-radius: 0.1px;
+	opacity: 0.5;
+	}
+
+	code:hover {
+		opacity: 1;
+		}
+
+.forkme {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 15vw;
+	height: 15vw;
+	max-width: 149px;
+	max-height: 149px;
+	z-index: 999;
+	overflow: hidden;
+	text-indent: 100%;
+	font: 0/0 a;
+	background: url("http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png");
+	background-size: cover;
+	}
+
+@media screen and (max-width: 640px) {
+	html, body {
+		font: 16px/1.4 'Josefin Slab', Georgia, serif;
+		}
+}

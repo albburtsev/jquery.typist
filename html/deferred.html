@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Simple typing</title>
+	<title>Deferred typing</title>
 	<link rel="stylesheet" href="static/styles.css">
 	<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/github.min.css">
 	<script src="http://yandex.st/jquery/2.0.3/jquery.min.js"></script>
@@ -12,24 +12,24 @@
 	<script>
 	jQuery(function($) {
 		$('.typist')
-			.typist({
-				speed: 12,
-				text: 'Hello!\n'
-			})
-			.typistAdd('It\'s working!');
+			.typist({ speed: 12 })
+			.typistDefer(3000) // 3 sec
+			.typistAdd(' – Professor?!\n')
+			.typistDefer(3000) // 2 sec
+			.typistAdd(' – Good News, Everyone!');
 	});
 	hljs.initHighlightingOnLoad();
 	</script>
 </head>
 <body>
-	<h1>Simple typing</h1>
+	<h1>Deferred typing</h1>
 
 	<pre><code class="javascript">$('.typist')
-	.typist({
-		speed: 12,
-		text: 'Hello!\n'
-	})
-	.typistAdd('It\'s working!');</code></pre>
+	.typist({ speed: 12 })
+	.typistDefer(3000) // 3 sec
+	.typistAdd(' – Professor?!\n')
+	.typistDefer(3000) // 2 sec
+	.typistAdd(' – Good News, Everyone!');</code></pre>
 
 	<p class="typist"></p>
 
