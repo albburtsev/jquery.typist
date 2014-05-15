@@ -12,7 +12,7 @@ html, body {
 	top: 0; left: 0;
 	width: 100%;
 	height: 100%;
-	background: url(textured_paper.png);
+	background: url(src/html/static/textured_paper.png);
 	font-family: 'Josefin Slab', Georgia, serif;
 	}
 
@@ -66,7 +66,7 @@ html, body {
 				transition: top 0.5s ease 0.1s, transform 0.5s;
 		}
 
-	.demo_type_delay {
+	.demo_type_deferred {
 		left: 50%;
 		top: 56%;
 		background: #CCC699;
@@ -78,10 +78,9 @@ html, body {
 				transform: scale(1.3);
 		}
 
-	.demo_type_events {
+	.demo_type_removal {
 		left: 75%;
 		top: 33%;
-		font-size: 2.5vw;
 		background: #B1654B;
 		-webkit-transition: top 0.5s ease 0.5s, -webkit-transform 0.5s;
 		   -moz-transition: top 0.5s ease 0.5s, -moz-transform 0.5s;
@@ -99,7 +98,7 @@ html, body {
 	height: 15vw;
 	max-width: 149px;
 	max-height: 149px;
-	z-index: 999;
+	z-index: 9999;
 	overflow: hidden;
 	text-indent: 100%;
 	font: 0/0 a;
