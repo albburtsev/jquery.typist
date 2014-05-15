@@ -26,8 +26,13 @@
 		});
 	};
 
-	$.fn.typistRemove = function() {
-		// @todo
+	$.fn.typistRemove = function(length) {
+		length = parseInt(length) || 0;
+		return this.each(function() {
+			var self = $(this).data('typist');
+			self.queue.push({ remove: length });
+			self.type();
+		});
 	};
 
 	$.fn.typistDefer = function(delay) {
@@ -40,7 +45,11 @@
 	};
 
 	$.fn.typistStop = function() {
-		// @todo
+		return this.each(function() {
+			var self = $(this).data('typist');
+			self.queue.push({ stop: true });
+			self.type();
+		});
 	};
 
 	function Typist(element, opts) {
@@ -94,6 +103,27 @@
 			}, this), this.blinkDelay);
 		},
 
+		nl2br: function(str) {
+			return str.replace('\n', '<br/>');
+		},
+
+		remove: function(length) {
+			if ( length <= 0 ) {
+				this.timer = null;
+				return this.type();
+			}
+
+			length--;
+			var text = this._container.text();
+			text = text.substr(0, text.length - 1);
+			text = this.nl2br(text);
+
+			this.timer = setTimeout($.proxy(function() {
+				this._container.html(text);
+				this.remove(length);
+			}, this), this.delay);
+		},
+
 		step: function(textArray) {
 			if ( !textArray.length ) {
 				this.timer = null;
@@ -101,11 +131,8 @@
 			}
 
 			var character = textArray.shift();
-			if ( character === '\n' ) {
-				character = '<br/>';
-			} else {
-				character = $('<div>').html(character).text();
-			}
+			character = $('<div>').text(character).html();
+			character = this.nl2br(character);
 
 			this.timer = setTimeout($.proxy(function() {
 				this._container.html(this._container.html() + character);
@@ -114,7 +141,16 @@
 		},
 
 		stop: function() {
+			clearInterval(this.blinkTimer);
+			this.blinkTimer = null;
 
+			if ( this._cursor ) {
+				this._cursor.remove();
+				this._cursor = null;
+			}
+
+			clearTimeout(this.timer);
+			this.timer = null;
 		},
 
 		type: function() {
@@ -136,22 +172,29 @@
 			}
 
 			var item = this.queue.shift(),
-				text, delay;
+				text;
 
 			if ( typeof item === 'string' ) {
 				text = item;
+
 			} else if ( item && item.delay ) {
-				delay = item.delay;
 				this.timer = setTimeout($.proxy(function() {
 					this.timer = null;
 					this.type();
-				}, this), delay);
+				}, this), item.delay);
+				return;
 
+			} else if ( item && item.remove ) {
+				this.remove(item.remove);
+				return;
+
+			} else if ( item && item.stop ) {
+				this.stop();
 				return;
 			}
 
 			if ( !text ) {
-				return this.stop();
+				return;
 			}
 
 			text = text.split('');
