@@ -1,6 +1,6 @@
 {
   "name": "jquery.typist",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": ["jquery.typist.js"],
   "ignore": [],
   "dependencies": {
