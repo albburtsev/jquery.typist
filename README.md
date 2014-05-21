@@ -40,21 +40,17 @@ jQuery(function($) {
 
 ### Options
 
-@todo
-
- * text
- * speed
- * cursor
- * blinkSpeed
- * typeFrom
- * cursorStyles
+ * __text__ {String} – text for typing;
+ * __speed__ {Number} – characters per second, default – ```10```;
+ * __cursor__ {Boolean} – shows blinking cursor, default – ```true```;
+ * __blinkSpeed__ {Number} – blinking per second, default – ```2```;
+ * __typeFrom__ {String} – typing from start/end of element, default – ```'end'```;
+ * __cursorStyles__ {Object} – CSS properties for cursor element.
 
 ### Methods
 
-@todo
-
- * typist()
- * typistAdd()
- * typistRemove()
- * typistDefer()
- * typistStop()
+ * __typist( [options] )__ – init method;
+ * __typistAdd( [text] )__ – additional text for typing;
+ * __typistRemove( [length] )__ – removes ```length``` number of characters;
+ * __typistDefer( [delay] )__ – pauses for ```delay``` milliseconds;
+ * __typistStop()__ – stops all animations.
