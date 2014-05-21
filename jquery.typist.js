@@ -35,7 +35,7 @@
 		});
 	};
 
-	$.fn.typistDefer = function(delay) {
+	$.fn.typistPause = function(delay) {
 		delay = parseInt(delay) || 0;
 		return this.each(function() {
 			var self = $(this).data('typist');

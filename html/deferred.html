@@ -13,9 +13,9 @@
 	jQuery(function($) {
 		$('.typist')
 			.typist({ speed: 12 })
-			.typistDefer(3000) // 3 sec
+			.typistPause(3000) // 3 sec
 			.typistAdd(' – Professor?!\n')
-			.typistDefer(3000) // 2 sec
+			.typistPause(3000) // 2 sec
 			.typistAdd(' – Good news, everyone!');
 	});
 	hljs.initHighlightingOnLoad();
@@ -26,9 +26,9 @@
 
 	<pre><code class="javascript">$('.typist')
 	.typist({ speed: 12 })
-	.typistDefer(3000) // 3 sec
+	.typistPause(3000) // 3 sec
 	.typistAdd(' – Professor?!\n')
-	.typistDefer(3000) // 2 sec
+	.typistPause(3000) // 2 sec
 	.typistAdd(' – Good news, everyone!');</code></pre>
 
 	<p class="typist"></p>
