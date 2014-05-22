@@ -11,6 +11,12 @@ Download latest [release](https://github.com/albburtsev/jquery.typist/releases).
 Use [minified](https://github.com/albburtsev/jquery.typist/blob/master/jquery.typist.min.js)
 or [development](https://github.com/albburtsev/jquery.typist/blob/master/jquery.typist.js) version.
 
+Or use [bower](http://bower.io/) for install:
+
+```
+bower install jquery.typist --save
+```
+
 ## Usage
 
 Include [jQuery](http://jquery.com) and __jquery.typist__ on your page:
