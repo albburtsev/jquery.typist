@@ -60,3 +60,26 @@ jQuery(function($) {
  * __typistRemove( [length] )__ – removes ```length``` number of characters;
  * __typistPause( [delay] )__ – pauses for ```delay``` milliseconds;
  * __typistStop()__ – stops all animations.
+
+### Events
+
+ * start_type.typist
+ * end_type.typist
+ * start_pause.typist
+ * end_pause.typist
+ * start_remove.typist
+ * end_remove.typist
+
+```
+$('.typist')
+	.on('start_type.typist', function() {
+		console.log('Start typing');
+	})
+	.on('end_type.typist', function() {
+		console.log('End typing');
+	})
+	.typist({ 
+		speed: 12,
+		text: 'Hello, typist!\n'
+	});
+```

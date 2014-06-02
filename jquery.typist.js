@@ -103,6 +103,11 @@
 			}, this), this.blinkDelay);
 		},
 
+		fire: function(event) {
+			this._element.trigger(event, this);
+			return this;
+		},
+
 		nl2br: function(str) {
 			return str.replace('\n', '<br/>');
 		},
@@ -110,7 +115,9 @@
 		remove: function(length) {
 			if ( length <= 0 ) {
 				this.timer = null;
-				return this.type();
+				return this
+					.fire('end_remove.typist')
+					.type();
 			}
 
 			length--;
@@ -127,7 +134,9 @@
 		step: function(textArray) {
 			if ( !textArray.length ) {
 				this.timer = null;
-				return this.type();
+				return this
+					.fire('end_type.typist')
+					.type();
 			}
 
 			var character = textArray.shift();
@@ -178,14 +187,20 @@
 				text = item;
 
 			} else if ( item && item.delay ) {
-				this.timer = setTimeout($.proxy(function() {
-					this.timer = null;
-					this.type();
-				}, this), item.delay);
+				this
+					.fire('start_pause.typist')
+					.timer = setTimeout($.proxy(function() {
+						this.timer = null;
+						this
+							.fire('end_pause.typist')
+							.type();
+					}, this), item.delay);
 				return;
 
 			} else if ( item && item.remove ) {
-				this.remove(item.remove);
+				this
+					.fire('start_remove.typist')
+					.remove(item.remove);
 				return;
 
 			} else if ( item && item.stop ) {
@@ -198,7 +213,10 @@
 			}
 
 			text = text.split('');
-			this.step(text);
+
+			this
+				.fire('start_type.typist')
+				.step(text);
 		}
 	};
 }));
