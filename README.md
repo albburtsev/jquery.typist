@@ -70,7 +70,7 @@ jQuery(function($) {
  * start_remove.typist
  * end_remove.typist
 
-```
+```js
 $('.typist')
 	.on('start_type.typist', function() {
 		console.log('Start typing');
