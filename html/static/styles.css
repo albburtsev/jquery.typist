@@ -43,6 +43,30 @@ code {
 	background-size: cover;
 	}
 
+.ava {
+	position: absolute;
+	overflow: hidden;
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+	}
+
+	.ava_othello {
+		top: 100px;
+		left: 5%;
+		background: no-repeat url(othello.png) 0 0;
+		}
+
+	.ava_desdemona {
+		bottom: 20px;
+		right: 5%;
+		background: no-repeat url(desdemona.png) 0 0;
+		}
+
+.typist_dialog {
+	margin: 30px 230px;
+	}
+
 @media screen and (max-width: 640px) {
 	html, body {
 		font: 16px/1.4 'Josefin Slab', Georgia, serif;
