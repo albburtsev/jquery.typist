@@ -58,7 +58,7 @@ html, body {
 		}
 
 	.demo_type_simple {
-		left: 20%;
+		left: 15%;
 		top: 42%;
 		background: #99D1B7;
 		-webkit-transition: top 0.5s ease 0.1s, -webkit-transform 0.5s;
@@ -67,8 +67,8 @@ html, body {
 		}
 
 	.demo_type_deferred {
-		left: 50%;
-		top: 56%;
+		left: 40%;
+		top: 60%;
 		background: #CCC699;
 		-webkit-transition: top 0.5s ease 0.3s, -webkit-transform 0.5s;
 		   -moz-transition: top 0.5s ease 0.3s, -moz-transform 0.5s;
@@ -79,7 +79,7 @@ html, body {
 		}
 
 	.demo_type_removal {
-		left: 75%;
+		left: 60%;
 		top: 33%;
 		background: #B1654B;
 		-webkit-transition: top 0.5s ease 0.5s, -webkit-transform 0.5s;
@@ -88,6 +88,18 @@ html, body {
 		-webkit-transform: scale(1.2);
 		   -moz-transform: scale(1.2);
 				transform: scale(1.2);
+		}
+
+	.demo_type_dialog {
+		left: 80%;
+		top: 70%;
+		background: #666;
+		-webkit-transition: top 0.5s ease 0.8s, -webkit-transform 0.5s;
+		   -moz-transition: top 0.5s ease 0.8s, -moz-transform 0.5s;
+				transition: top 0.5s ease 0.8s, transform 0.5s;
+		-webkit-transform: scale(1.25);
+		   -moz-transform: scale(1.25);
+				transform: scale(1.25);
 		}
 
 .forkme {
