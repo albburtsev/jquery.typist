@@ -44,7 +44,7 @@ code {
 	}
 
 .ava {
-	position: absolute;
+	position: fixed;
 	overflow: hidden;
 	width: 200px;
 	height: 200px;
@@ -58,7 +58,7 @@ code {
 		}
 
 	.ava_desdemona {
-		bottom: 20px;
+		top: 120px;
 		right: 5%;
 		background: no-repeat url(desdemona.png) 0 0;
 		}
@@ -66,6 +66,24 @@ code {
 .typist_dialog {
 	margin: 30px 230px;
 	}
+
+	.typist_dialog__item {
+		clear: both;
+		margin: 0 0 20px;
+		padding: 10px 20px;
+		border: 1px solid #999;
+		border-radius: 7px;
+		}
+
+		.typist_dialog__item_speaker_othello {
+			float: left;
+			background: #B3DFFF;
+			}
+
+		.typist_dialog__item_speaker_desdemona {
+			float: right;
+			background: #FFDBF4;
+			}
 
 @media screen and (max-width: 640px) {
 	html, body {

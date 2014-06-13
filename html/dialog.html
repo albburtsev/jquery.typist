@@ -10,7 +10,63 @@
 	<script src="../jquery.typist.js"></script>
 	<script>
 	jQuery(function($) {
-		
+		var dialog = [
+			{
+				speaker: 'othello',
+				text: 'basta prostituta! osi piangerlo davanti a me?'
+			},
+			{
+				speaker: 'desdemona',
+				text: 'scacciatemi, signore mio, ma non mi auccidete.'
+			}, {
+				speaker: 'othello',
+				text: 'gia\', prostituta!'
+			}, {
+				speaker: 'desdemona',
+				text: 'uccidetemi domani. lsciatemi ancora vivere questa notte.'
+			}, {
+				speaker: 'othello',
+				text: 'se ti ribelli...'
+			}, {
+				speaker: 'desdemona',
+				text: 'mezz\'ora soltanto!'
+			}, {
+				speaker: 'othello',
+				text: 'l\'azione non conosce indugi.'
+			}, {
+				speaker: 'desdemona',
+				text: 'il tempo per una preghiera.'
+			}, {
+				speaker: 'othello',
+				text: 'troppo tardi (la soffoca)'
+			}
+		];
+
+		function printPhrase() {
+			var phrase = dialog.shift();
+
+			if ( !phrase ) {
+				return;
+			}
+
+			$('<p>')
+				.addClass('typist_dialog__item typist_dialog__item_speaker_' + phrase.speaker)
+				.appendTo('.typist_dialog')
+				.typist({
+					text: phrase.text
+				})
+				.typistPause(2000)
+				.typistStop()
+				.on('end_pause.typist', function() {
+					printPhrase();
+				});
+
+			$('body').animate({
+				scrollTop: $(document).height()
+			}, 'slow');
+		}
+
+		printPhrase();
 	});
 	</script>
 </head>
@@ -20,7 +76,10 @@
 	<div class="ava ava_othello"></div>
 	<div class="ava ava_desdemona"></div>
 
-	<p class="typist_dialog">TODO</p>
+	<div class="typist_dialog">
+		<!--div class="typist_dialog__item typist_dialog__item_speaker_othello"></div>
+		<div class="typist_dialog__item typist_dialog__item_speaker_desdemona">Scacciatemi, signore mio, ma non mi auccidete.</div-->
+	</div>
 
 	<a href="https://github.com/albburtsev/jquery.typist" class="forkme">Fork me on GitHub</a>
 </body>
