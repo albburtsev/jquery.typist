@@ -6,11 +6,12 @@ module.exports = function(grunt) {
 		.forEach(grunt.loadNpmTasks);
 
 	grunt.initConfig({
-		jsSource: 'jquery.typist.js',
+		jsSource: 'src/*.js',
+		jsDist: 'dist/',
 		banner: 
 			'/**\n' +
-			' * jquery.typist\n' +
-			' * @author Alexander Burtsev, http://burtsev.me, <%= grunt.template.today("yyyy") %>\n' +
+			' * jquery.typist — animated text typing\n' +
+			' * @author Alexander Burtsev, http://burtsev.me, 2014—<%= grunt.template.today("yyyy") %>\n' +
 			' * @license MIT\n' +
 			' */\n',
 
@@ -30,13 +31,30 @@ module.exports = function(grunt) {
 			app: ['<%= jsSource %>']
 		},
 
+		copy: {
+			options: {
+				process: function (content, srcpath) {
+					return grunt.config.get('banner') + content;
+				}
+			},
+			source: {
+				files: [{
+					expand: true,
+					cwd: 'src/',
+					src: ['**'],
+					dest: 'dist/'
+				}]
+			}
+		},
+
 		uglify: {
 			options: {
-				banner: '<%= banner %>'
+				banner: '<%= banner %>',
+				sourceMap: true
 			},
 			typist: {
 				files: {
-					'jquery.typist.min.js': ['<%= jsSource %>']
+					'<%= jsDist %>jquery.typist.min.js': ['<%= jsSource %>']
 				}
 			}
 		},
@@ -44,10 +62,10 @@ module.exports = function(grunt) {
 		watch: {
 			typist: {
 				files: ['<%= jsSource %>'],
-				tasks: ['jshint', 'jscs', 'uglify']
+				tasks: ['jshint', 'jscs', 'copy', 'uglify']
 			}
 		}
 	});
 
-	grunt.registerTask('default', ['jshint', 'jscs', 'uglify', 'watch']);
+	grunt.registerTask('default', ['jshint', 'jscs', 'copy', 'uglify', 'watch']);
 };

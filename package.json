@@ -1,8 +1,7 @@
 {
   "name": "jquery.typist",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "Animated text typing",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/albburtsev/jquery.typist.git"
@@ -26,8 +25,9 @@
   "homepage": "https://github.com/albburtsev/jquery.typist",
   "devDependencies": {
     "grunt": "^0.4.4",
+    "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-contrib-uglify": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jscs-checker": "^0.4.1",
     "matchdep": "^0.3.0"

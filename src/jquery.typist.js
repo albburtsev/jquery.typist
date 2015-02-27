@@ -1,8 +1,3 @@
-/**
- * jquery.typist – animated text typing
- * @author Alexander Burtsev, http://burtsev.me, 2014
- * @license MIT
- */
  (function(factory) {
 	if ( typeof define === 'function' && define.amd ) {
 		define(['jquery'], factory);

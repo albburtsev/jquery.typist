@@ -1,8 +1,13 @@
 {
   "name": "jquery.typist",
   "version": "0.0.3",
-  "main": ["jquery.typist.js"],
-  "ignore": [],
+  "main": ["dist/jquery.typist.js"],
+  "ignore": [
+    "Gruntfile.js",
+    "package.json",
+    ".jscs.json",
+    "html/"
+  ],
   "dependencies": {
     "jquery": ">=1.7"
   }
