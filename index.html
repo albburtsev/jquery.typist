@@ -6,19 +6,19 @@
 	<title>jQuery.typist</title>
 	<link rel="stylesheet" href="styles.css">
 	<script src="http://yandex.st/jquery/2.0.3/jquery.min.js"></script>
-	<script src="src/jquery.typist.js"></script>
+	<script src="src/dist/jquery.typist.js"></script>
 	<script>
 	jQuery(function($) {
 		$('.is-hidden').removeClass('is-hidden');
 		setTimeout(function() {
-			$('.demos__title').typist({ text: 'jQuery.typist demos:' });
+			$('.title').typist({ text: 'jQuery.typist demos:' });
 		}, 1000);
 	});
 	</script>
 </head>
 <body>
+	<h1 class="title">&nbsp;</h1>
 	<div class="demos">
-		<h1 class="demos__title"></h1>
 		<a class="demo demo_type_simple is-hidden" href="src/html/simple.html">Simple</a>
 		<a class="demo demo_type_deferred is-hidden" href="src/html/deferred.html">Deferred</a>
 		<a class="demo demo_type_removal is-hidden" href="src/html/removal.html">Removal</a>
