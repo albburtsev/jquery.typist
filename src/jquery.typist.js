@@ -13,28 +13,28 @@
 		});
 	};
 
-	$.fn.typistAdd = function(text) {
+	$.fn.typistAdd = function(text, callback) {
 		return this.each(function() {
 			var self = $(this).data('typist');
-			self.queue.push(text);
+			self.queue.push({ text: text, callback: callback });
 			self.type();
 		});
 	};
 
-	$.fn.typistRemove = function(length) {
+	$.fn.typistRemove = function(length, callback) {
 		length = parseInt(length) || 0;
 		return this.each(function() {
 			var self = $(this).data('typist');
-			self.queue.push({ remove: length });
+			self.queue.push({ remove: length, callback: callback });
 			self.type();
 		});
 	};
 
-	$.fn.typistPause = function(delay) {
+	$.fn.typistPause = function(delay, callback) {
 		delay = parseInt(delay) || 0;
 		return this.each(function() {
 			var self = $(this).data('typist');
-			self.queue.push({ delay: delay });
+			self.queue.push({ delay: delay, callback: callback });
 			self.type();
 		});
 	};
@@ -47,6 +47,17 @@
 		});
 	};
 
+	/**
+	 * @class
+	 * @param {HTMLElement} element
+	 * @param {Object} [opts]
+	 * @param {String} [opts.text=''] Text for typing
+	 * @param {Number} [opts.speed=10] Typing speed (characters per second)
+	 * @param {Boolean} [opts.cursor=true] Shows blinking cursor
+	 * @param {Number} [opts.blinkSpeed=2] Blinking per second
+	 * @param {String} [opts.typeFrom='end'] Typing from start/end of element
+	 * @param {Object} [opts.cursorStyles] CSS properties for cursor element
+	 */
 	function Typist(element, opts) {
 		$.extend(this, {
 			speed: 10, // characters per second
@@ -73,12 +84,17 @@
 		this.blinkDelay = 1000 / this.blinkSpeed;
 
 		if ( this.text ) {
-			this.queue.push(this.text);
+			this.queue.push({ text: this.text });
 			this.type();
 		}
 	}
 
-	Typist.prototype = {
+	Typist.prototype =
+	/** @lends Typist */
+	{
+		/**
+		 * Adds blinking cursor into element
+		 */
 		addCursor: function() {
 			if ( this._cursor ) {
 				clearInterval(this.blinkTimer);
@@ -98,17 +114,33 @@
 			}, this), this.blinkDelay);
 		},
 
+		/**
+		 * Triggers event
+		 * @param {String} event
+		 * @return {Typist}
+		 */
 		fire: function(event) {
 			this._element.trigger(event, this);
 			return this;
 		},
 
+		/**
+		 * New line character to <br> tag
+		 * @param {String} str
+		 * @return {String}
+		 */
 		nl2br: function(str) {
 			return str.replace('\n', '<br/>');
 		},
 
-		remove: function(length) {
+		/**
+		 * Removes given number of characters
+		 * @param {Number} length
+		 * @param {Function} [callback]
+		 */
+		remove: function(length, callback) {
 			if ( length <= 0 ) {
+				callback();
 				this.timer = null;
 				return this
 					.fire('end_remove.typist')
@@ -122,28 +154,41 @@
 
 			this.timer = setTimeout($.proxy(function() {
 				this._container.html(text);
-				this.remove(length);
+				this.remove(length, callback);
 			}, this), this.delay);
 		},
 
-		step: function(textArray) {
-			if ( !textArray.length ) {
+		/**
+		 * Adds given text character by character
+		 * @param {String|Array} text
+		 */
+		step: function(text, callback) {
+			if ( typeof text === 'string' ) {
+				text = text.split('');
+			}
+
+			if ( !text.length ) {
+				callback();
 				this.timer = null;
 				return this
 					.fire('end_type.typist')
 					.type();
 			}
 
-			var character = textArray.shift();
+			var character = text.shift();
 			character = $('<div>').text(character).html();
 			character = this.nl2br(character);
 
 			this.timer = setTimeout($.proxy(function() {
 				this._container.html(this._container.html() + character);
-				this.step(textArray);
+				this.step(text, callback);
 			}, this), this.delay);
 		},
 
+		/**
+		 * Stops all animations and removes cursor
+		 * @return {[type]} [description]
+		 */
 		stop: function() {
 			clearInterval(this.blinkTimer);
 			this.blinkTimer = null;
@@ -157,6 +202,9 @@
 			this.timer = null;
 		},
 
+		/**
+		 * Gets and invokes tasks from queue
+		 */
 		type: function() {
 			if ( this.timer ) {
 				return;
@@ -175,16 +223,14 @@
 				this.addCursor();
 			}
 
-			var item = this.queue.shift(),
-				text;
+			var item = this.queue.shift() || {},
+				callback = $.proxy(item.callback || $.noop, this);
 
-			if ( typeof item === 'string' ) {
-				text = item;
-
-			} else if ( item && item.delay ) {
+			if ( item.delay ) {
 				this
 					.fire('start_pause.typist')
 					.timer = setTimeout($.proxy(function() {
+						callback();
 						this.timer = null;
 						this
 							.fire('end_pause.typist')
@@ -192,26 +238,24 @@
 					}, this), item.delay);
 				return;
 
-			} else if ( item && item.remove ) {
+			} else if ( item.remove ) {
 				this
 					.fire('start_remove.typist')
-					.remove(item.remove);
+					.remove(item.remove, callback);
 				return;
 
-			} else if ( item && item.stop ) {
+			} else if ( item.stop ) {
 				this.stop();
 				return;
 			}
 
-			if ( !text ) {
+			if ( !item.text ) {
 				return;
 			}
 
-			text = text.split('');
-
 			this
 				.fire('start_type.typist')
-				.step(text);
+				.step(item.text, callback);
 		}
 	};
 }));

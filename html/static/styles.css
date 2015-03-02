@@ -3,8 +3,11 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	background: url(textured_paper.png);
 	font: 24px/1.4 'Josefin Slab', Georgia, serif;
+	}
+
+html {
+	background: url(textured_paper.png);
 	}
 
 body {

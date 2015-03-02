@@ -56,9 +56,9 @@ jQuery(function($) {
 ### Methods
 
  * __typist( [options] )__ – init method;
- * __typistAdd( [text] )__ – additional text for typing;
- * __typistRemove( [length] )__ – removes ```length``` number of characters;
- * __typistPause( [delay] )__ – pauses for ```delay``` milliseconds;
+ * __typistAdd( [text], [callback] )__ – additional text for typing;
+ * __typistRemove( [length], [callback] )__ – removes ```length``` number of characters;
+ * __typistPause( [delay], [callback] )__ – pauses for ```delay``` milliseconds;
  * __typistStop()__ – stops all animations.
 
 ### Events
