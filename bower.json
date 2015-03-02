@@ -1,6 +1,6 @@
 {
   "name": "jquery.typist",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": ["dist/jquery.typist.js"],
   "ignore": [
     "Gruntfile.js",
