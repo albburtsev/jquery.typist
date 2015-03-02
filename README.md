@@ -70,6 +70,8 @@ jQuery(function($) {
  * start_remove.typist
  * end_remove.typist
 
+[Try the Demo](http://albburtsev.github.io/jquery.typist/src/html/dialog.html)
+
 ```js
 $('.typist')
 	.on('start_type.typist', function() {
