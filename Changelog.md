@@ -1,3 +1,7 @@
+### 2015-02-02 v0.0.6
+
+ * Bugfix: removal doesnt't kill line feed
+
 ### 2015-02-02 v0.0.5
 
 Animated pseudo typing with abilities:
