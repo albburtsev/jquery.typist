@@ -7,6 +7,14 @@
 }(function($) {
 	'use strict';
 
+	$.fn.typistInit = function () {
+		return this.each(function() {
+			if ( !$(this).data('typist')) {
+				new Typist(this);
+			}
+		});
+	};
+
 	$.fn.typist = function(opts) {
 		return this.each(function() {
 			new Typist(this, opts);
@@ -14,37 +22,47 @@
 	};
 
 	$.fn.typistAdd = function(text, callback) {
-		return this.each(function() {
-			var self = $(this).data('typist');
-			self.queue.push({ text: text, callback: callback });
-			self.type();
-		});
+		return this
+			.typistInit()
+			.each(function() {
+				var self = $(this).data('typist');
+				self.queue.push({ text: text, callback: callback });
+				self.type();
+			});
 	};
 
 	$.fn.typistRemove = function(length, callback) {
 		length = parseInt(length) || 0;
-		return this.each(function() {
-			var self = $(this).data('typist');
-			self.queue.push({ remove: length, callback: callback });
-			self.type();
-		});
+
+		return this
+			.typistInit()
+			.each(function() {
+				var self = $(this).data('typist');
+				self.queue.push({ remove: length, callback: callback });
+				self.type();
+			});
 	};
 
 	$.fn.typistPause = function(delay, callback) {
 		delay = parseInt(delay) || 0;
-		return this.each(function() {
-			var self = $(this).data('typist');
-			self.queue.push({ delay: delay, callback: callback });
-			self.type();
-		});
+
+		return this
+			.typistInit()
+			.each(function() {
+				var self = $(this).data('typist');
+				self.queue.push({ delay: delay, callback: callback });
+				self.type();
+			});
 	};
 
 	$.fn.typistStop = function() {
-		return this.each(function() {
-			var self = $(this).data('typist');
-			self.queue.push({ stop: true });
-			self.type();
-		});
+		return this
+			.typistInit()
+			.each(function() {
+				var self = $(this).data('typist');
+				self.queue.push({ stop: true });
+				self.type();
+			});
 	};
 
 	/**
@@ -73,8 +91,10 @@
 			}
 		}, opts || {});
 
+		this._cursor = null;
 		this._element = $(element);
 		this._element.data('typist', this);
+		this._container = null;
 
 		this.queue = [];
 		this.timer = null;
@@ -125,12 +145,21 @@
 		},
 
 		/**
-		 * New line character to <br> tag
-		 * @param {String} str
+		 * New line to <br> tag
+		 * @param {String} text
 		 * @return {String}
 		 */
-		nl2br: function(str) {
-			return str.replace('\n', '<br/>');
+		nl2br: function(text) {
+			return text.replace(/\n/g, '<br>');
+		},
+
+		/**
+		 * <br> tag to new line
+		 * @param {String} html
+		 * @return {String}
+		 */
+		br2nl: function (html) {
+			return html.replace(/<br.*?>/g, '\n');
 		},
 
 		/**
@@ -147,8 +176,10 @@
 					.type();
 			}
 
+			var text = this._container.html();
+
 			length--;
-			var text = this._container.text();
+			text = this.br2nl(text);
 			text = text.substr(0, text.length - 1);
 			text = this.nl2br(text);
 
