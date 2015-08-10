@@ -187,6 +187,8 @@
 				this._container.html(text);
 				this.remove(length, callback);
 			}, this), this.delay);
+
+			this.fire('tick.typist');
 		},
 
 		/**
@@ -214,6 +216,8 @@
 				this._container.html(this._container.html() + character);
 				this.step(text, callback);
 			}, this), this.delay);
+
+			this.fire('tick.typist');
 		},
 
 		/**

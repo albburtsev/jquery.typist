@@ -69,6 +69,7 @@ jQuery(function($) {
  * end_pause.typist
  * start_remove.typist
  * end_remove.typist
+ * tick.typist
 
 [Try the Demo](http://albburtsev.github.io/jquery.typist/src/html/dialog.html)
 
